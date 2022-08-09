@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.bluepi
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [app-name, data, data-jpa, http-client, java, java-application, jdbc-hikari, junit, logback, lombok, maven, mysql, netty-server, reactor, readme, shade, testcontainers, yaml]

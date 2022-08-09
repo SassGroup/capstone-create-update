@@ -1,0 +1,87 @@
+micronaut:
+  application:
+    name: idfc-loan-operation
+  server:
+    port: 8081
+
+aerospike:
+  namespace: edu_loan_ops
+  host: 10.180.15.130,10.180.15.131,10.180.15.132
+  port: 3000,3000,3000
+  username: eduw
+  password: eduw
+  user:
+    authentication:
+      enabled: 1
+  rwPolicy:
+    readPolicyDefault:
+      totalTimeout: 1000
+    writePolicyDefault:
+      totalTimeout: 500
+    minConnsPerNode: 20
+    maxSocketIdle: 60
+  readPolicy:
+    readPolicyDefault:
+      totalTimeout: 1000
+    minConnsPerNode: 20
+    maxSocketIdle: 60
+  expiration:
+    ttl: 6000
+
+kafka:
+  server:
+    key: bootstrap.servers
+    value: 10.180.11.77:9092,10.180.11.78:9092,10.180.11.43:9092
+  max:
+    poll:
+      records: 20
+  consumer:
+    poll:
+      interval: 500
+    thread:
+      count: 1
+  topic:
+    internal-update: internal-update-kafka-topic
+
+iod:
+  keep:
+    alive:
+      time: 1000
+  min:
+    pool:
+      size: 30
+  max:
+    pool:
+      size: 40
+
+oracle:
+  classname: oracle.jdbc.driver.OracleDriver
+  url: jdbc:oracle:thin:@10.5.129.98:1653/MULEASSETPT
+  username: EDU_LOAN_USER
+  password: IDfc$#2021
+  initialsize: 1
+  maxactive: 20
+  minidle: 10
+
+lams:
+  id:
+    prefix: LOS-
+
+default:
+  service:
+    retry:
+      counter: 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+

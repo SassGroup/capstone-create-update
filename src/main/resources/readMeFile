@@ -1,0 +1,63 @@
+
+steps to execute query----->
+----------------------------
+execute 2 sequence and one oracle query and execute aerospike query given by below
+
+need to execute query in AQl prompt
+-------------------------------------
+// product_metadata table for getting ttl value as days
+Insert into test.product_metadata(PK,prod_grp,prod_code,prod_scheme,prod_cfg_key,Ttl) values (3,"EL","","","EL",2);
+
+//master_metaData table
+Insert into test.master_metaData(PK,masterMDKey,masterQuType,queryMetaData)  values(1,"PIN_CODE_SERVICE","QUERY",'{"bin":"pincode","set":"pincode"}');
+
+// apply these two mandatory Index on respective tables mentioned below before performing validations.
+CREATE INDEX user_prod_cfg_key_idx ON test.product_metadata (prod_cfg_key) STRING;
+CREATE INDEX user_validations__prod_cfg_key_idx ON test.validations (prod_cfg_key) STRING;
+
+//pincode table
+Insert into test.pincode (PK,pincode) values (1,"122001");
+Insert into test.pincode (PK,pincode) values (2,"768083");
+Insert into test.pincode (PK,pincode) values (3,"511234");
+
+///mvel validations script
+
+Insert into test.validations(PK,prod_cfg_key,name,dataType,validationRules,expression,masterMDKey,errorMessage) values (1,"EL_INL_PG","mobileNumber","Long",'["notNull","notEmpty"]',"mobileNumber != empty and mobileNumber != null and mobileNumber >0 and String.valueOf(mobileNumber).length == 10","NA","Please specify valid mobileNumber");
+Insert into test.validations(PK,prod_cfg_key,name,dataType,validationRules,expression,masterMDKey,errorMessage) values (2,"EL_INL_PG","pincode","Integer",'["notNull","notEmpty"]',"pincode != empty and pincode != null and pincode >0 and String.valueOf(pincode).length == 6","PIN_CODE_SERVICE","Please specify valid pincode");
+
+
+
+Process for creating sequence in Oracle :
+----------------------------------------
+write both below query into sql prompt and create both sequence before running
+Loan Operation Application on server.
+
+Query for create Oracle sequence of LoanApplicationId
+------------------------------------------------------
+CREATE SEQUENCE application_id_seq
+START WITH 10000
+INCREMENT BY 1;
+
+
+Query for create Oracle sequence of ApplicantId
+------------------------------------------------------
+CREATE SEQUENCE applicant_id_seq
+START WITH 10000
+INCREMENT BY 1;
+
+Drop Sequence query:
+------------------------
+DROP SEQUENCE sequence_name ;
+
+Query for create Oracle table for Duplicate check
+------------------------------------------------------
+create table DuplicateCheck (
+  Business_Identifier varchar(20),
+  Application_ID NUMBER(20),
+ Mobile_Number NUMBER(11),
+Status  NUMBER(2),
+  constraint PK_D primary key (Application_ID, Mobile_Number,Status)
+);
+
+
+-Djdk.tls.client.protocols=TLSv1.2

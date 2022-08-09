@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: capstone-create-update-deployment
+    labels:
+        app: capstone-create-update
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: capstone-create-update
+    template:
+        metadata:
+            labels:
+                app: capstone-create-update
+        spec:
+            containers:
+            - name: capstone-create-update-container
+              image: vincentstrife/capstone-create-update:v{version}
+              ports:
+              - containerPort: 8081

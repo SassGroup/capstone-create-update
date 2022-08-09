@@ -1,0 +1,88 @@
+micronaut:
+  application:
+    name: idfc-loan-operation
+  server:
+    port: 8081
+
+aerospike:
+  namespace: test
+  host: localhost
+  port: 3000
+  username: eduw
+  password: eduw
+  user:
+    authentication:
+      enabled: 0
+  rwPolicy:
+    readPolicyDefault:
+      totalTimeout: 1000
+    writePolicyDefault:
+      totalTimeout: 500
+    minConnsPerNode: 20
+    maxSocketIdle: 60
+  readPolicy:
+    readPolicyDefault:
+      totalTimeout: 1000
+    minConnsPerNode: 20
+    maxSocketIdle: 60
+  expiration:
+    ttl: 6000
+
+kafka:
+  server:
+    key: bootstrap.servers
+    value: kafka-service:9092
+  max:
+    poll:
+      records: 20
+  consumer:
+    poll:
+      interval: 500
+    thread:
+      count: 1
+  topic:
+   internal-update: internal-update-kafka-topic
+
+iod:
+  keep:
+    alive:
+      time: 1000
+  min:
+    pool:
+      size: 30
+  max:
+    pool:
+      size: 40
+
+
+oracle:
+  classname: oracle.jdbc.driver.OracleDriver
+  url: jdbc:oracle:thin:@localhost:1521/orclpdb1
+  username: system
+  password: admin123
+  initialsize: 1
+  maxactive: 20
+  minidle: 10
+
+lams:
+  id:
+    prefix: LOS-
+
+default:
+  service:
+    retry:
+      counter: 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+Process for creating sequence in Oracle :
+----------------------------------------
+write both below query into sql prompt and create both sequence before running
+Loan Operation Application on server.
+
+Query for create Oracle sequence of LoanApplicationId
+------------------------------------------------------
+CREATE SEQUENCE application_id_seq
+START WITH 10000
+INCREMENT BY 1;
+
+
+Query for create Oracle sequence of ApplicantId
+------------------------------------------------------
+CREATE SEQUENCE applicant_id_seq
+START WITH 10000
+INCREMENT BY 1;
+
+Drop Sequence query:
+------------------------
+DROP SEQUENCE sequence_name ;
